@@ -1,0 +1,139 @@
+@use "sass:map";
+$spacing: (
+  "4": 4px,
+  "8": 8px,
+  "12": 12px,
+  "16": 16px,
+  "20": 20px,
+  "24": 24px,
+  "28": 28px,
+  "32": 32px,
+  "36": 36px,
+  "40": 40px,
+  "44": 44px,
+);
+$directions: (
+  "": "",
+  "t": "-top",
+  "b": "-bottom",
+  "l": "-left",
+  "r": "-right",
+);
+
+$breakpoints: (
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+);
+
+@mixin respond-up($breakpoint) {
+  $size: map-get($breakpoints, $breakpoint);
+  @if $size {
+    @media (min-width: $size) {
+      @content;
+    }
+  } @else {
+    @warn "Nieprawidłowy breakpoint: #{$breakpoint}";
+  }
+}
+
+@each $size, $value in $spacing {
+  .p-#{$size} {
+    padding: $value;
+  }
+  .m-#{$size} {
+    margin: $value;
+  }
+
+  @each $short, $long in $directions {
+    .p#{$short}-#{$size} {
+      padding#{$long}: $value;
+    }
+    .m#{$short}-#{$size} {
+      margin#{$long}: $value;
+    }
+  }
+
+  @each $bp, $bp-size in $breakpoints {
+    @media (min-width: $bp-size) {
+      .p-#{$bp}-#{$size} {
+        padding: $value;
+      }
+      .m-#{$bp}-#{$size} {
+        margin: $value;
+      }
+
+      @each $short, $long in $directions {
+        .p#{$short}-#{$bp}-#{$size} {
+          padding#{$long}: $value;
+        }
+        .m#{$short}-#{$bp}-#{$size} {
+          margin#{$long}: $value;
+        }
+      }
+    }
+  }
+}
+$font-sizes: (
+  "xs": 12px,
+  "sm": 14px,
+  "md": 16px,
+  "lg": 20px,
+  "xl": 24px,
+  "2xl": 32px,
+  "3xl": 36px,
+  "4xl": 40px,
+  "5xl": 48px,
+  "6xl": 56px,
+  "7xl": 64px,
+  "8xl": 72px,
+  "9xl": 76px,
+  "10xl": 96px,
+);
+@each $key, $value in $font-sizes {
+  .fs-#{$key} {
+    font-size: $value;
+  }
+}
+$line-height: (
+  "xs": 1em,
+  "sm": 1.2em,
+  "md": 1.5em,
+  "lg": 1.8em,
+  "xl": 2em,
+  "xxl": 2.5em,
+);
+@each $key, $value in $line-height {
+  .fs-#{$key} {
+    line-height: $value;
+  }
+}
+$z-index-levels: (
+  "negativ": -1,
+  "neutral": 0,
+  "positive": 1,
+  "header": 5,
+  "modal": 10,
+  "dropdown": 50,
+  "message": 100,
+  "debug": 999,
+);
+$font-weight: (
+  "100": 100,
+  "200": 200,
+  "300": 300,
+  "400": 400,
+  "500": 500,
+  "600": 600,
+  "700": 700,
+  "800": 800,
+);
+@each $key, $value in $font-weight {
+  .fw-#{$key} {
+    font-weight: $value;
+  }
+}
+
+$font-roboto: "Roboto", sans-serif;
