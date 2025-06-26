@@ -10,7 +10,20 @@
     <title>Game App</title>
   </head>
   <body>
-    <div id="app"></div>
+    <section class="start">
+      <h1>Welcome to the game!</h1>
+      <label for="playerName">Player name:</label>
+      <input type="text" id="playerName" placeholder="Enter your name" />
+
+      <label for="difficulty">Difficulty level:</label>
+      <select id="difficulty">
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+
+      <button>Start game</button>
+    </section>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
