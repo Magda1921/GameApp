@@ -1,1 +1,62 @@
 @use "variables" as *;
+
+body {
+  padding: 1rem;
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+  background: linear-gradient(
+    135deg,
+    $color-bg-gradient-start,
+    $color-bg-gradient-end
+  );
+  color: $color-text-primary;
+  display: flex;
+
+  @include respond-up(md) {
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+label {
+  margin-bottom: map-get($spacing, "8");
+  display: block;
+  font-weight: map-get($font-weight, "600");
+}
+
+input,
+select {
+  width: 100%;
+  padding: map-get($spacing, "8") map-get($spacing, "12");
+  border-radius: map-get($spacing, "8");
+  border: 1px solid $color-border;
+  font-size: map-get($font-sizes, "md");
+  background-color: $color-input-bg;
+  transition: border $transition-fast;
+  box-sizing: border-box;
+  &:focus {
+    border-color: $color-primary;
+    outline: none;
+  }
+}
+
+button {
+  margin-top: map-get($spacing, "16");
+  width: 100%;
+  padding: map-get($spacing, "12");
+  background-color: $color-primary;
+  color: #fff;
+  border: none;
+  border-radius: map-get($spacing, "8");
+  font-size: map-get($font-sizes, "md");
+  font-weight: map-get($font-weight, "600");
+  cursor: pointer;
+  transition: background-color $transition-fast;
+
+  &:hover {
+    background-color: $color-primary-hover;
+  }
+}
