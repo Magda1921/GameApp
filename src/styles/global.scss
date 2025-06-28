@@ -26,20 +26,3 @@ body {
   }
 }
 
-button {
-  margin-top: map-get($spacing, "16");
-  width: 100%;
-  padding: map-get($spacing, "12");
-  background-color: $color-primary;
-  color: #fff;
-  border: none;
-  border-radius: map-get($spacing, "8");
-  font-size: map-get($font-sizes, "md");
-  font-weight: map-get($font-weight, "600");
-  cursor: pointer;
-  transition: background-color $transition-fast;
-
-  &:hover {
-    background-color: $color-primary-hover;
-  }
-}
