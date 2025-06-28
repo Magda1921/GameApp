@@ -1,3 +1,4 @@
+@import "node_modules/modern-normalize/modern-normalize.css";
 .p-4 {
   padding: 4px;
 }
@@ -2728,6 +2729,12 @@
   font-weight: 800;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   padding: 1rem;
   align-items: flex-start;
@@ -2744,29 +2751,6 @@ body {
     justify-content: center;
     align-items: center;
   }
-}
-
-label {
-  margin-bottom: 8px;
-  display: block;
-  font-weight: 600;
-}
-
-input,
-select {
-  width: 100%;
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid #cbd5e1;
-  font-size: 16px;
-  background-color: #f8fafc;
-  transition: border 0.2s ease;
-  box-sizing: border-box;
-}
-input:focus,
-select:focus {
-  border-color: #3b82f6;
-  outline: none;
 }
 
 button {
@@ -2845,4 +2829,26 @@ textarea {
   .start__player, .start__difficulty {
     margin-bottom: 1.2rem;
   }
+}
+
+label {
+  margin-bottom: 8px;
+  display: block;
+  font-weight: 600;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 16px;
+  background-color: #f8fafc;
+  transition: border 0.2s ease;
+}
+input:focus,
+select:focus {
+  border-color: #3b82f6;
+  outline: none;
 }/*# sourceMappingURL=main.css.map */
