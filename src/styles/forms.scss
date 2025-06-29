@@ -1,0 +1,21 @@
+@use "variables" as *;
+label {
+  margin-bottom: map-get($spacing, "8");
+  display: block;
+  font-weight: map-get($font-weight, "600");
+}
+
+input,
+select {
+  width: 100%;
+  padding: map-get($spacing, "8") map-get($spacing, "12");
+  border-radius: map-get($spacing, "8");
+  border: 1px solid $color-border;
+  font-size: map-get($font-sizes, "md");
+  background-color: $color-input-bg;
+  transition: border $transition-fast;
+  &:focus {
+    border-color: $color-primary;
+    outline: none;
+  }
+}

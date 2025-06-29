@@ -1,0 +1,26 @@
+@use "../variables" as *;
+.start {
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: none;
+  margin-top: 2rem;
+  max-width: 100%;
+  background-color: $color-white;
+  text-align: center;
+  box-sizing: border-box;
+  @include respond-up(md) {
+    padding: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px $color-box-shadow;
+    width: 100%;
+    max-width: 400px;
+  }
+  &__player,
+  &__difficulty {
+    margin-bottom: 1rem;
+    text-align: left;
+    @include respond-up(md) {
+      margin-bottom: 1.2rem;
+    }
+  }
+}

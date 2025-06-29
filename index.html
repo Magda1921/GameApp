@@ -10,7 +10,31 @@
     <title>Game App</title>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+    <form>
+      <section class="start js-start">
+        <h1>Welcome to the game!</h1>
+        <div class="start__player">
+          <label for="playerName">Player name:</label>
+          <input
+            type="text"
+            class="js-player-name"
+            id="playerName"
+            placeholder="Enter your name"
+          />
+        </div>
+        <div class="start__difficulty">
+          <label for="difficulty">Difficulty level:</label>
+          <select id="difficulty" class="js-difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+        <button type="submit" class="mt-16 p-12 js-start-button">
+          Start game
+        </button>
+      </section>
+    </form>
+    <script type="module" src="/src/js/main.js"></script>
   </body>
 </html>
