@@ -1,8 +1,6 @@
-import "/src/styles/main.css";
-
 export async function fetchImages(query, count) {
-  const accessKey = "U0Idyxs9bDIH4_sgybQiaXfMDlw16_VSI8BLM9sSueU";
-  const url = `https://api.unsplash.com/search/photos?query=${query}&per_page=${count}&client_id=${accessKey}`;
+  const apiKey = import.meta.env.VITE_API_KEY;
+  const url = `https://api.unsplash.com/search/photos?query=${query}&per_page=${count}&client_id=${apiKey}`;
 
   try {
     const res = await fetch(url);

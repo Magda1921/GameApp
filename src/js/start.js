@@ -1,6 +1,4 @@
-import "/src/styles/main.css";
-
-import { fetchImages } from "/src/js/imageFetcher.js";
+import { fetchImages } from "/src/js/fetchImages.js";
 
 export function initStart(element) {
   const startBtn = element;
@@ -13,21 +11,13 @@ export function initStart(element) {
     e.preventDefault();
     const name = input.value;
     const difficulty = select.value;
+    const imageCountsByDifficulty = {
+      easy: 4,
+      medium: 8,
+      hard: 12,
+    };
 
-    let imageCount;
-    switch (difficulty) {
-      case "easy":
-        imageCount = 4;
-        break;
-      case "medium":
-        imageCount = 8;
-        break;
-      case "hard":
-        imageCount = 12;
-        break;
-      default:
-        imageCount = 4;
-    }
+    const imageCount = imageCountsByDifficulty[difficulty] ?? 4;
 
     const query = "cats";
     const images = await fetchImages(query, imageCount);
