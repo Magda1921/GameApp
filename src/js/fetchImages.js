@@ -1,6 +1,11 @@
 export async function fetchImages(query, count) {
   const apiKey = import.meta.env.VITE_API_KEY;
-  const url = `https://api.unsplash.com/search/photos?query=${query}&per_page=${count}&client_id=${apiKey}`;
+
+  const url = new URL("https://api.unsplash.com/search/photos");
+
+  url.searchParams.set("query", query);
+  url.searchParams.set("per_page", count);
+  url.searchParams.set("client_id", apiKey);
 
   try {
     const res = await fetch(url);
