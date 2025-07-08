@@ -1,4 +1,5 @@
 import { fetchImages } from "/src/js/fetchImages.js";
+import { initGame } from "/src/js/initGame.js";
 
 export function initStart(element) {
   const startBtn = element;
@@ -21,5 +22,6 @@ export function initStart(element) {
 
     const query = "cats";
     const images = await fetchImages(query, imageCount);
+    initGame(images, imageCount, element);
   });
 }
