@@ -7,7 +7,6 @@
   max-width: 100%;
   background-color: $color-white;
   text-align: center;
-  box-sizing: border-box;
 
   @include respond-up(md) {
     padding: 2.5rem;
