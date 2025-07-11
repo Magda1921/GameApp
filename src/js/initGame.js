@@ -1,3 +1,4 @@
+import { playGame } from "./playGame.js";
 export function initGame(images, difficulty, startSection) {
   startSection.classList.add("start--hidden");
   const gameSection = document.querySelector(".js-game");
@@ -23,12 +24,15 @@ export function initGame(images, difficulty, startSection) {
 
     const img = document.createElement("img");
     img.src = imageUrl;
+    img.dataset.id = imageSrc.id;
     img.alt = imageSrc.alt_description || "Cat image";
 
     img.classList.add("game__image");
+
     card.classList.add("game__card");
 
     card.appendChild(img);
     grid.appendChild(card);
   });
+  playGame(grid, numPairs);
 }
