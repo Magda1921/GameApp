@@ -1,4 +1,5 @@
 import { playGame } from "./playGame.js";
+import { startCountTimer } from "./timer.js";
 export function initGame(images, difficulty, startSection) {
   startSection.classList.add("start--hidden");
   const gameSection = document.querySelector(".js-game");
@@ -34,5 +35,6 @@ export function initGame(images, difficulty, startSection) {
     card.appendChild(img);
     grid.appendChild(card);
   });
+  startCountTimer();
   playGame(grid, numPairs);
 }
