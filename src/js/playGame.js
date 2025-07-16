@@ -1,8 +1,13 @@
+import { countScore } from "./scoreCounter";
+import { stopCountTimer } from "./timer";
+
 export function playGame(grid, numPairs) {
   const gameState = {
     cards: grid.children,
     flippedCards: [],
     lockBoard: false,
+    pairsFound: 0,
+    time: 0,
   };
 
   Array.from(gameState.cards).forEach((card) => {
@@ -35,6 +40,7 @@ function handleMatchCheck(gameState) {
 
   if (isMatch) {
     resetFlippedCards(gameState);
+    addFoundPair(gameState);
   } else {
     handleMismatch(first, second, gameState);
   }
@@ -64,4 +70,13 @@ function checkForMatch(firstCard, secondCard) {
 function flipCard(card, gameState) {
   card.children[0].classList.add("img--flipped");
   gameState.flippedCards.push(card);
+}
+function addFoundPair(gameState) {
+  gameState.pairsFound++;
+  if (gameState.pairsFound === gameState.cards.length / 2) {
+    stopCountTimer(gameState);
+    countScore(gameState);
+    const dialog = document.querySelector(".js-game-end");
+    dialog.showModal();
+  }
 }
