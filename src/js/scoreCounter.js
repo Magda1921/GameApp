@@ -1,9 +1,6 @@
-export function countScore() {
+export function countScore(gameState) {
   const scoreDisplay = document.querySelector(".js-score");
-  let score = 0;
+  const score = gameState.pairsFound * (100 / gameState.time);
 
-  setInterval(() => {
-    score++;
-    scoreDisplay.textContent = `Score: ${score}`;
-  }, 1000);
+  scoreDisplay.textContent = `Your score: ${Math.round(score)}`;
 }
