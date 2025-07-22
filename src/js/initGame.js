@@ -14,10 +14,11 @@ export function initGame(images, difficulty, startSection) {
 
   const imagePairs = prepareImagePairs(difficulty, images);
   const grid = document.querySelector(".js-game-content");
+  const playerName = document.querySelector(".js-player-name").value;
 
   renderGrid(grid, imagePairs);
   startCountTimer();
-  playGame(grid, imagePairs.length / 2, startSection, gameSection);
+  playGame(grid, imagePairs.length / 2, startSection, gameSection, playerName);
 }
 
 function prepareImagePairs(numPairs, images) {

@@ -2,7 +2,13 @@ import { countScore } from "./scoreCounter";
 import { stopCountTimer } from "./timer";
 import { constructToggleSections } from "./helpers/toggleSections.js";
 
-export function playGame(grid, numPairs, startSection, gameSection) {
+export function playGame(
+  grid,
+  numPairs,
+  startSection,
+  gameSection,
+  playerName
+) {
   const gameState = {
     cards: grid.children,
     flippedCards: [],
@@ -12,7 +18,7 @@ export function playGame(grid, numPairs, startSection, gameSection) {
   };
 
   Array.from(gameState.cards).forEach((card) => {
-    handleCardClick(card, gameState);
+    handleCardClick(card, gameState, playerName);
   });
 
   const toggleSections = constructToggleSections(
@@ -24,16 +30,18 @@ export function playGame(grid, numPairs, startSection, gameSection) {
   handleEndGame();
 }
 
-function handleCardClick(card, gameState) {
-  card.addEventListener("click", () => onCardClick(card, gameState));
+function handleCardClick(card, gameState, playerName) {
+  card.addEventListener("click", () =>
+    onCardClick(card, gameState, playerName)
+  );
 }
 
-function onCardClick(card, gameState) {
+function onCardClick(card, gameState, playerName) {
   if (shouldIgnoreClick(card, gameState)) return;
 
   flipCard(card, gameState);
   if (gameState.flippedCards.length === 2) {
-    handleMatchCheck(gameState);
+    handleMatchCheck(gameState, playerName);
   }
 }
 
@@ -43,13 +51,13 @@ function shouldIgnoreClick(card, gameState) {
   );
 }
 
-function handleMatchCheck(gameState) {
+function handleMatchCheck(gameState, playerName) {
   const [first, second] = gameState.flippedCards;
   const isMatch = checkForMatch(first, second);
 
   if (isMatch) {
     resetFlippedCards(gameState);
-    addFoundPair(gameState);
+    addFoundPair(gameState, playerName);
   } else {
     handleMismatch(first, second, gameState);
   }
@@ -80,11 +88,11 @@ function flipCard(card, gameState) {
   card.children[0].classList.add("img--flipped");
   gameState.flippedCards.push(card);
 }
-function addFoundPair(gameState) {
+function addFoundPair(gameState, playerName) {
   gameState.pairsFound++;
   if (gameState.pairsFound === gameState.cards.length / 2) {
     stopCountTimer(gameState);
-    countScore(gameState);
+    countScore(gameState, playerName);
     const dialog = document.querySelector(".js-game-end");
     dialog.showModal();
   }
