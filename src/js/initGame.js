@@ -1,21 +1,23 @@
 import { playGame } from "./playGame.js";
 import { startCountTimer } from "./timer.js";
+import { constructToggleSections } from "./helpers/toggleSections.js";
 
 export function initGame(images, difficulty, startSection) {
   const gameSection = document.querySelector(".js-game");
-  toggleSections(startSection, gameSection);
+  const toggleSections = constructToggleSections(
+    "start--hidden",
+    "game--hidden",
+    startSection,
+    gameSection
+  );
+  toggleSections();
 
   const imagePairs = prepareImagePairs(difficulty, images);
   const grid = document.querySelector(".js-game-content");
 
   renderGrid(grid, imagePairs);
   startCountTimer();
-  playGame(grid, imagePairs.length / 2);
-}
-
-function toggleSections(hideSection, showSection) {
-  hideSection.classList.add("start--hidden");
-  showSection.classList.remove("game--hidden");
+  playGame(grid, imagePairs.length / 2, startSection, gameSection);
 }
 
 function prepareImagePairs(numPairs, images) {
