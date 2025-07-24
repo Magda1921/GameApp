@@ -18,7 +18,16 @@ export function initGame(images, difficulty, startSection) {
 
   renderGrid(grid, imagePairs);
   startCountTimer();
-  playGame(grid, imagePairs.length / 2, startSection, gameSection, playerName);
+
+  const gameConfig = {
+    grid: grid,
+    pairCount: imagePairs.length / 2,
+    startSection: startSection,
+    gameSection: gameSection,
+    playerName: playerName,
+  };
+
+  playGame(gameConfig);
 }
 
 function prepareImagePairs(numPairs, images) {

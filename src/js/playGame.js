@@ -2,15 +2,9 @@ import { countScore } from "./scoreCounter";
 import { stopCountTimer } from "./timer";
 import { constructToggleSections } from "./helpers/toggleSections.js";
 
-export function playGame(
-  grid,
-  numPairs,
-  startSection,
-  gameSection,
-  playerName
-) {
+export function playGame(gameConfig) {
   const gameState = {
-    cards: grid.children,
+    cards: gameConfig.grid.children,
     flippedCards: [],
     lockBoard: false,
     pairsFound: 0,
@@ -18,14 +12,14 @@ export function playGame(
   };
 
   Array.from(gameState.cards).forEach((card) => {
-    handleCardClick(card, gameState, playerName);
+    handleCardClick(card, gameState, gameConfig.playerName);
   });
 
   const toggleSections = constructToggleSections(
     "game--hidden",
     "start--hidden",
-    gameSection,
-    startSection
+    gameConfiggameSection,
+    gameConfig.startSection
   );
   handleEndGame();
 }
