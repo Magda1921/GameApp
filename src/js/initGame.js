@@ -20,11 +20,11 @@ export function initGame(images, difficulty, startSection) {
   startCountTimer();
 
   const gameConfig = {
-    grid: grid,
+    grid,
     pairCount: imagePairs.length / 2,
-    startSection: startSection,
-    gameSection: gameSection,
-    playerName: playerName,
+    startSection,
+    gameSection,
+    playerName,
   };
 
   playGame(gameConfig);
