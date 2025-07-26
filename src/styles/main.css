@@ -2900,6 +2900,14 @@ textarea {
   max-width: 400px;
   text-align: center;
 }
+.score::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+}
+.score__table {
+  width: 100%;
+}
 
 label {
   margin-bottom: 8px;
