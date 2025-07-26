@@ -21,82 +21,90 @@ export function playGame(gameConfig) {
     gameConfig.gameSection,
     gameConfig.startSection
   );
-  handleEndGame();
-}
+  handleEndOrRestartButton(".js-end-button");
+  handleEndOrRestartButton(".js-restart-button");
 
-function handleCardClick(card, gameState, playerName) {
-  card.addEventListener("click", () =>
-    onCardClick(card, gameState, playerName)
-  );
-}
+  const dialog = document.querySelector(".js-game-end");
 
-function onCardClick(card, gameState, playerName) {
-  if (shouldIgnoreClick(card, gameState)) return;
-
-  flipCard(card, gameState);
-  if (gameState.flippedCards.length === 2) {
-    handleMatchCheck(gameState, playerName);
+  function handleCardClick(card, gameState, playerName) {
+    card.addEventListener("click", () =>
+      onCardClick(card, gameState, playerName)
+    );
   }
-}
 
-function shouldIgnoreClick(card, gameState) {
-  return (
-    gameState.lockBoard || card.children[0].classList.contains("img--flipped")
-  );
-}
+  function onCardClick(card, gameState, playerName) {
+    if (shouldIgnoreClick(card, gameState)) return;
 
-function handleMatchCheck(gameState, playerName) {
-  const [first, second] = gameState.flippedCards;
-  const isMatch = checkForMatch(first, second);
-
-  if (isMatch) {
-    resetFlippedCards(gameState);
-    addFoundPair(gameState, playerName);
-  } else {
-    handleMismatch(first, second, gameState);
+    flipCard(card, gameState);
+    if (gameState.flippedCards.length === 2) {
+      handleMatchCheck(gameState, playerName);
+    }
   }
-}
 
-function handleMismatch(first, second, gameState) {
-  gameState.lockBoard = true;
-  setTimeout(() => {
-    unflipCard(first);
-    unflipCard(second);
-    resetFlippedCards(gameState);
-    gameState.lockBoard = false;
-  }, 1000);
-}
-
-function unflipCard(card) {
-  card.children[0].classList.remove("img--flipped");
-}
-
-function resetFlippedCards(gameState) {
-  gameState.flippedCards = [];
-}
-
-function checkForMatch(firstCard, secondCard) {
-  return firstCard.children[0].dataset.id === secondCard.children[0].dataset.id;
-}
-function flipCard(card, gameState) {
-  card.children[0].classList.add("img--flipped");
-  gameState.flippedCards.push(card);
-}
-function addFoundPair(gameState, playerName) {
-  gameState.pairsFound++;
-  if (gameState.pairsFound === gameState.cards.length / 2) {
-    stopCountTimer(gameState);
-    countScore(gameState, playerName);
-    const dialog = document.querySelector(".js-game-end");
-    dialog.showModal();
+  function shouldIgnoreClick(card, gameState) {
+    return (
+      gameState.lockBoard || card.children[0].classList.contains("img--flipped")
+    );
   }
-}
-function handleEndGame() {
-  const endButton = document.querySelector(".js-end-button");
-  endButton.addEventListener("click", () => {
-    finishGame();
-  });
-}
-function finishGame() {
-  toggleSections();
+
+  function handleMatchCheck(gameState, playerName) {
+    const [first, second] = gameState.flippedCards;
+    const isMatch = checkForMatch(first, second);
+
+    if (isMatch) {
+      resetFlippedCards(gameState);
+      addFoundPair(gameState, playerName);
+    } else {
+      handleMismatch(first, second, gameState);
+    }
+  }
+
+  function handleMismatch(first, second, gameState) {
+    gameState.lockBoard = true;
+    setTimeout(() => {
+      unflipCard(first);
+      unflipCard(second);
+      resetFlippedCards(gameState);
+      gameState.lockBoard = false;
+    }, 1000);
+  }
+
+  function unflipCard(card) {
+    card.children[0].classList.remove("img--flipped");
+  }
+
+  function resetFlippedCards(gameState) {
+    gameState.flippedCards = [];
+  }
+
+  function checkForMatch(firstCard, secondCard) {
+    return (
+      firstCard.children[0].dataset.id === secondCard.children[0].dataset.id
+    );
+  }
+  function flipCard(card, gameState) {
+    card.children[0].classList.add("img--flipped");
+    gameState.flippedCards.push(card);
+  }
+  function addFoundPair(gameState, playerName) {
+    gameState.pairsFound++;
+    if (gameState.pairsFound === gameState.cards.length / 2) {
+      stopCountTimer(gameState);
+      countScore(gameState, playerName);
+      dialog.showModal();
+    }
+  }
+  function handleEndOrRestartButton(buttonSelector) {
+    const button = document.querySelector(buttonSelector);
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      finishGame();
+      const dialog = document.querySelector(".js-game-end");
+      dialog.close();
+    });
+  }
+  function finishGame() {
+    document.querySelector(".js-player-name").value = "";
+    toggleSections();
+  }
 }
