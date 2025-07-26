@@ -18,7 +18,7 @@ export function playGame(gameConfig) {
   const toggleSections = constructToggleSections(
     "game--hidden",
     "start--hidden",
-    gameConfiggameSection,
+    gameConfig.gameSection,
     gameConfig.startSection
   );
   handleEndGame();
