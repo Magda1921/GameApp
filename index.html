@@ -40,7 +40,7 @@
 
         <h2 class="js-game-title">Game in progress...</h2>
         <div class="js-game-content game__cards"></div>
-        <button class="mt-16 p-12 js-end-button">End Game</button>
+        <button type="submit" class="mt-16 p-12 js-end-button">End Game</button>
       </section>
       <dialog class="js-game-end score">
         <div class="js-score"></div>
@@ -54,7 +54,9 @@
           </thead>
           <tbody class="js-score-body"></tbody>
         </table>
-        <button class="mt-16 p-12 js-restart-button">Restart Game</button>
+        <button type="submit" class="mt-16 p-12 js-restart-button">
+          Restart Game
+        </button>
       </dialog>
     </form>
     <script type="module" src="/src/js/main.js"></script>

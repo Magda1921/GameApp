@@ -11,6 +11,10 @@ export function initStart(element) {
   btn.addEventListener("click", async function (e) {
     e.preventDefault();
     const name = input.value;
+    if (!name) {
+      alert("Please enter your name.");
+      return;
+    }
     const difficulty = select.value;
     const imageCountsByDifficulty = {
       easy: 4,
